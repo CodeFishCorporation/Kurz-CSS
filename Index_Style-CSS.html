@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>6-недельный курс CSS</title>
+  <link rel="stylesheet" href="css-course.css">
+</head>
+<body>
+  <header>
+    <h1>6-недельный курс CSS</h1>
+    <p>Прокачай свой сайт: от простых стилей до анимаций и адаптива!</p>
+  </header>
+
+  <div class="weeks-nav-floating">
+    <button data-goto="cssweek1" class="main-btn">Неделя 1</button>
+    <button data-goto="cssweek2" class="main-btn">Неделя 2</button>
+    <button data-goto="cssweek3" class="main-btn">Неделя 3</button>
+    <button data-goto="cssweek4" class="main-btn">Неделя 4</button>
+    <button data-goto="cssweek5" class="main-btn">Неделя 5</button>
+    <button data-goto="cssweek6" class="main-btn">Неделя 6</button>
+    <button data-goto="cssexam" class="main-btn">Экзамен</button>
+  </div>
+
+  <div class="container">
+    <div class="progress-container">
+      <div class="progress-bar">
+        <div class="progress" id="progress"></div>
+      </div>
+      <span class="progress-text" id="progressText">0% завершено</span>
+    </div>
+
+    <div class="accordion">
+      <!-- Неделя 1 -->
+      <div class="accordion-item" id="cssweek1">
+        <button class="accordion-btn">Неделя 1: Селекторы, цвета и ссылки</button>
+        <div class="accordion-content">
+          <div class="theory">
+            <h3>Теория</h3>
+            <p>CSS-селекторы позволяют выбирать элементы для стилизации. Основные типы: тег, класс, id, универсальный. Цвета задаются HEX, RGB, HSL или словами.</p>
+            <ul>
+              <li><b>Тег:</b> <code>p</code> — все абзацы</li>
+              <li><b>Класс:</b> <code>.main</code> — все элементы с классом main</li>
+              <li><b>ID:</b> <code>#header</code> — элемент с id="header"</li>
+              <li><b>Универсальный:</b> <code>*</code> — все элементы</li>
+            </ul>
+            <h3>Лайфхак</h3>
+            <p>Используй <code>:hover</code> для эффектов при наведении, <code>:active</code> — при нажатии.</p>
+          </div>
+          <div class="code-example">
+            <pre><code>p {
+  color: #39ff14;
+}
+a {
+  color: #8ee4af;
+  text-decoration: underline;
+  transition: color 0.2s;
+}
+a:hover {
+  color: #21b573;
+}
+</code></pre>
+          </div>
+          <div class="live-demo">
+            <div style="background:#232d25;padding:10px;">
+              <p style="color:#39ff14;">Это зелёный абзац</p>
+              <a href="#" style="color:#8ee4af;text-decoration:underline;transition:color 0.2s;">Это ссылка</a>
+            </div>
+          </div>
+          <div class="quiz">
+            <h3>Вопрос:</h3>
+            <div class="quiz-question">Какой селектор выберет все элементы с классом "main"?</div>
+            <div class="quiz-options">
+              <label><input type="radio" name="css1q1" value="a"> #main</label>
+              <label><input type="radio" name="css1q1" value="b"> .main</label>
+              <label><input type="radio" name="css1q1" value="c"> main</label>
+              <label><input type="radio" name="css1q1" value="d"> *main</label>
+            </div>
+            <button class="quiz-submit main-btn">Проверить ответ</button>
+            <div class="quiz-result"></div>
+          </div>
+          <div class="practice">
+            <h3>Задание:</h3>
+            <p>Сделай все ссылки на своём сайте зелёными и добавь эффект при наведении.</p>
+          </div>
+          <div class="complete-section">
+            <button class="complete-btn main-btn">Отметить неделю как пройденную</button>
+            <button class="undo-btn main-btn" style="background:#263c2a;color:#39ff14;">Отменить</button>
+          </div>
+        </div>
+      </div>
+      <!-- Междуметие 1 -->
+      <div class="accordion-item midweek" id="cssmid1">
+        <button class="accordion-btn">Междуметие 1: Повторение и интересные факты</button>
+        <div class="accordion-content">
+          <div class="theory">
+            <h3>Что ты уже знаешь?</h3>
+            <ul>
+              <li>Как выбирать элементы с помощью селекторов</li>
+              <li>Как задавать цвета и стилизовать ссылки</li>
+            </ul>
+            <h3>Факт</h3>
+            <p>CSS поддерживает более 140 цветовых слов, например <code>tomato</code>, <code>gold</code>, <code>rebeccapurple</code>.</p>
+            <h3>Совет</h3>
+            <p>Для палитр попробуй <a href="https://coolors.co/" target="_blank">Coolors</a> или <a href="https://colorhunt.co/" target="_blank">Color Hunt</a>.</p>
+          </div>
+        </div>
+      </div>
+      <!-- Неделя 2 -->
+      <div class="accordion-item" id="cssweek2">
+        <button class="accordion-btn">Неделя 2: Шрифты, отступы и оформление текста</button>
+        <div class="accordion-content">
+          <div class="theory">
+            <h3>Теория</h3>
+            <p>Свойства <code>font-family</code>, <code>font-size</code>, <code>font-weight</code> отвечают за шрифты. <code>margin</code> — внешний отступ, <code>padding</code> — внутренний. <code>text-align</code> выравнивает текст.</p>
+            <h3>Лайфхак</h3>
+            <p>Используй Google Fonts для стильных шрифтов. Например: <code>@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap');</code></p>
+          </div>
+          <div class="code-example">
+            <pre><code>body {
+  font-family: 'Montserrat', Arial, sans-serif;
+}
+h1 {
+  margin-bottom: 20px;
+  padding: 10px;
+  text-align: center;
+  font-weight: 700;
+}
+</code></pre>
+          </div>
+          <div class="live-demo">
+            <div style="font-family:'Montserrat',Arial,sans-serif;">
+              <h1 style="margin-bottom:20px;padding:10px;background:#263c2a;color:#39ff14;text-align:center;font-weight:700;">Заголовок</h1>
+              <p>Текст с новым шрифтом</p>
+            </div>
+          </div>
+          <div class="quiz">
+            <h3>Вопрос:</h3>
+            <div class="quiz-question">Что делает свойство <code>padding</code>?</div>
+            <div class="quiz-options">
+              <label><input type="radio" name="css2q1" value="a"> Задаёт внешний отступ</label>
+              <label><input type="radio" name="css2q1" value="b"> Задаёт внутренний отступ</label>
+              <label><input type="radio" name="css2q1" value="c"> Меняет шрифт</label>
+              <label><input type="radio" name="css2q1" value="d"> Делает текст жирным</label>
+            </div>
+            <button class="quiz-submit main-btn">Проверить ответ</button>
+            <div class="quiz-result"></div>
+          </div>
+          <div class="practice">
+            <h3>Задание:</h3>
+            <p>Добавь новый шрифт и выравнивание заголовков на своём сайте.</p>
+          </div>
+          <div class="complete-section">
+            <button class="complete-btn main-btn">Отметить неделю как пройденную</button>
+            <button class="undo-btn main-btn" style="background:#263c2a;color:#39ff14;">Отменить</button>
+          </div>
+        </div>
+      </div>
+      <!-- Междуметие 2 -->
+      <div class="accordion-item midweek" id="cssmid2">
+        <button class="accordion-btn">Междуметие 2: Повторение и расширение</button>
+        <div class="accordion-content">
+          <div class="theory">
+            <h3>Что ты уже знаешь?</h3>
+            <ul>
+              <li>Как подключать и использовать шрифты</li>
+              <li>Как управлять отступами и выравниванием</li>
+            </ul>
+            <h3>Факт</h3>
+            <p>Свойство <code>line-height</code> помогает сделать текст более читаемым.</p>
+            <h3>Совет</h3>
+            <p>Используй <code>rem</code> и <code>em</code> для адаптивных размеров шрифта.</p>
+          </div>
+        </div>
+      </div>
+      <!-- Неделя 3 -->
+      <div class="accordion-item" id="cssweek3">
+        <button class="accordion-btn">Неделя 3: Flexbox и выравнивание</button>
+        <div class="accordion-content">
+          <div class="theory">
+            <h3>Теория</h3>
+            <p>Flexbox — современный способ выравнивания и распределения элементов. <code>display: flex</code> превращает контейнер в flex-контейнер.</p>
+            <ul>
+              <li><code>justify-content</code> — выравнивание по главной оси</li>
+              <li><code>align-items</code> — по поперечной оси</li>
+              <li><code>gap</code> — расстояние между элементами</li>
+            </ul>
+            <h3>Лайфхак</h3>
+            <p>Flexbox отлично подходит для адаптивных меню и карточек.</p>
+          </div>
+          <div class="code-example">
+            <pre><code>.flex-demo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+.flex-demo div {
+  background: #39ff14;
+  color: #232d25;
+  padding: 12px 24px;
+  border-radius: 10px;
+}
+</code></pre>
+          </div>
+          <div class="live-demo">
+            <div class="flex-demo" style="display:flex;justify-content:space-between;align-items:center;gap:16px;">
+              <div style="background:#39ff14;color:#232d25;padding:12px 24px;border-radius:10px;">1</div>
+              <div style="background:#39ff14;color:#232d25;padding:12px 24px;border-radius:10px;">2</div>
+              <div style="background:#39ff14;color:#232d25;padding:12px 24px;border-radius:10px;">3</div>
+            </div>
+          </div>
+          <div class="quiz">
+            <h3>Вопрос:</h3>
+            <div class="quiz-question">Что делает <code>align-items: center;</code>?</div>
+            <div class="quiz-options">
+              <label><input type="radio" name="css3q1" value="a"> Центрирует элементы по горизонтали</label>
+              <label><input type="radio" name="css3q1" value="b"> Центрирует элементы по вертикали</label>
+              <label><input type="radio" name="css3q1" value="c"> Делает элементы невидимыми</label>
+              <label><input type="radio" name="css3q1" value="d"> Увеличивает отступы</label>
+            </div>
+            <button class="quiz-submit main-btn">Проверить ответ</button>
+            <div class="quiz-result"></div>
+          </div>
+          <div class="practice">
+            <h3>Задание:</h3>
+            <p>Сделай блок с тремя элементами, выровненными по центру с помощью Flexbox.</p>
+          </div>
+          <div class="complete-section">
+            <button class="complete-btn main-btn">Отметить неделю как пройденную</button>
+            <button class="undo-btn main-btn" style="background:#263c2a;color:#39ff14;">Отменить</button>
+          </div>
+        </div>
+      </div>
+      <!-- Междуметие 3 -->
+      <div class="accordion-item midweek" id="cssmid3">
+        <button class="accordion-btn">Междуметие 3: Повторение и лайфхаки</button>
+        <div class="accordion-content">
+          <div class="theory">
+            <h3>Что ты уже знаешь?</h3>
+            <ul>
+              <li>Как выравнивать элементы с помощью Flexbox</li>
+              <li>Как использовать gap для отступов</li>
+            </ul>
+            <h3>Факт</h3>
+            <p>Flexbox позволяет легко делать адаптивные сетки без float и clearfix.</p>
+            <h3>Совет</h3>
+            <p>Для сложных сеток изучи CSS Grid!</p>
+          </div>
+        </div>
+      </div>
+      <!-- Неделя 4 -->
+      <div class="accordion-item" id="cssweek4">
+        <button class="accordion-btn">Неделя 4: Анимации и переходы</button>
+        <div class="accordion-content">
+          <div class="theory">
+            <h3>Теория</h3>
+            <p>Свойство <code>transition</code> делает изменения плавными. <code>@keyframes</code> позволяет создавать сложные анимации.</p>
+            <h3>Лайфхак</h3>
+            <p>Используй <code>transform: scale()</code> для эффекта "нажатия" на кнопку.</p>
+          </div>
+          <div class="code-example">
+            <pre><code>button {
+  transition: background 0.3s, transform 0.2s;
+}
+button:hover {
+  background: #39ff14;
+  transform: scale(1.05);
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+</code></pre>
+          </div>
+          <div class="live-demo">
+            <button style="background:#232d25;color:#39ff14;padding:12px 28px;border-radius:30px;transition:background 0.3s,transform 0.2s;cursor:pointer;" onmouseover="this.style.background='#39ff14';this.style.color='#232d25';this.style.transform='scale(1.05)'" onmouseout="this.style.background='#232d25';this.style.color='#39ff14';this.style.transform='scale(1)'">Наведи на меня</button>
+          </div>
+          <div class="quiz">
+            <h3>Вопрос:</h3>
+            <div class="quiz-question">Что делает свойство <code>transition</code>?</div>
+            <div class="quiz-options">
+              <label><input type="radio" name="css4q1" value="a"> Добавляет тень</label>
+              <label><input type="radio" name="css4q1" value="b"> Делает переходы плавными</label>
+              <label><input type="radio" name="css4q1" value="c"> Меняет цвет текста</label>
+              <label><input type="radio" name="css4q1" value="d"> Увеличивает размер шрифта</label>
+            </div>
+            <button class="quiz-submit main-btn">Проверить ответ</button>
+            <div class="quiz-result"></div>
+          </div>
+          <div class="practice">
+            <h3>Задание:</h3>
+            <p>Добавь анимацию появления для главного блока на сайте с помощью <code>@keyframes</code>.</p>
+          </div>
+          <div class="complete-section">
+            <button class="complete-btn main-btn">Отметить неделю как пройденную</button>
+            <button class="undo-btn main-btn" style="background:#263c2a;color:#39ff14;">Отменить</button>
+          </div>
+        </div>
+      </div>
+      <!-- Междуметие 4 -->
+      <div class="accordion-item midweek" id="cssmid4">
+        <button class="accordion-btn">Междуметие 4: Повторение и советы</button>
+        <div class="accordion-content">
+          <div class="theory">
+            <h3>Что ты уже знаешь?</h3>
+            <ul>
+              <li>Как делать плавные переходы и анимации</li>
+              <li>Как применять эффекты к кнопкам и блокам</li>
+            </ul>
+            <h3>Факт</h3>
+            <p>Анимации делают интерфейс живым, но не переборщи — всё должно быть уместно!</p>
+            <h3>Совет</h3>
+            <p>Для сложных анимаций попробуй <a href="https://animate.style/" target="_blank">Animate.css</a>.</p>
+          </div>
+        </div>
+      </div>
+      <!-- Неделя 5 -->
+      <div class="accordion-item" id="cssweek5">
+        <button class="accordion-btn">Неделя 5: Адаптивный дизайн и медиа-запросы</button>
+        <div class="accordion-content">
+          <div class="theory">
+            <h3>Теория</h3>
+            <p>Медиа-запросы позволяют менять стили в зависимости от размера экрана. Используй <code>@media</code> для адаптива.</p>
+            <h3>Лайфхак</h3>
+            <p>Используй относительные единицы (<code>em</code>, <code>rem</code>, <code>%</code>) для гибкости.</p>
+          </div>
+          <div class="code-example">
+            <pre><code>@media (max-width: 600px) {
+  body {
+    font-size: 0.9rem;
+    padding: 8px;
+  }
+  .main-btn {
+    width: 100%;
+    font-size: 1rem;
+  }
+}
+</code></pre>
+          </div>
+          <div class="live-demo">
+            <div style="background:#263c2a;color:#39ff14;padding:10px;">
+              <span style="font-size:1.2em;">Измени размер окна — текст станет меньше!</span>
+            </div>
+          </div>
+          <div class="quiz">
+            <h3>Вопрос:</h3>
+            <div class="quiz-question">Что делает медиа-запрос <code>@media (max-width: 600px)</code>?</div>
+            <div class="quiz-options">
+              <label><input type="radio" name="css5q1" value="a"> Применяет стили, если ширина экрана меньше 600px</label>
+              <label><input type="radio" name="css5q1" value="b"> Применяет стили, если ширина экрана больше 600px</label>
+              <label><input type="radio" name="css5q1" value="c"> Игнорируется браузером</label>
+              <label><input type="radio" name="css5q1" value="d"> Меняет цвет текста</label>
+            </div>
+            <button class="quiz-submit main-btn">Проверить ответ</button>
+            <div class="quiz-result"></div>
+          </div>
+          <div class="practice">
+            <h3>Задание:</h3>
+            <p>Сделай свой сайт удобным на телефоне: добавь медиа-запросы для уменьшения отступов и размера шрифта.</p>
+          </div>
+          <div class="complete-section">
+            <button class="complete-btn main-btn">Отметить неделю как пройденную</button>
+            <button class="undo-btn main-btn" style="background:#263c2a;color:#39ff14;">Отменить</button>
+          </div>
+        </div>
+      </div>
+      <!-- Междуметие 5 -->
+      <div class="accordion-item midweek" id="cssmid5">
+        <button class="accordion-btn">Междуметие 5: Повторение и расширение</button>
+        <div class="accordion-content">
+          <div class="theory">
+            <h3>Что ты уже знаешь?</h3>
+            <ul>
+              <li>Как делать сайт адаптивным</li>
+              <li>Как использовать медиа-запросы</li>
+            </ul>
+            <h3>Факт</h3>
+            <p>Более 60% пользователей заходят на сайты с мобильных устройств!</p>
+            <h3>Совет</h3>
+            <p>Проверь сайт на разных устройствах с помощью DevTools (F12).</p>
+          </div>
+        </div>
+      </div>
+      <!-- Неделя 6 -->
+      <div class="accordion-item" id="cssweek6">
+        <button class="accordion-btn">Неделя 6: Переменные, лучшие практики и итоги</button>
+        <div class="accordion-content">
+          <div class="theory">
+            <h3>Теория</h3>
+            <p>CSS-переменные (<code>--var</code>) позволяют легко менять цвета и стили во всём проекте. Используй их для темизации.</p>
+            <h3>Лайфхак</h3>
+            <p>Храни основные цвета и размеры в <code>:root</code> и меняй их для разных тем!</p>
+          </div>
+          <div class="code-example">
+            <pre><code>:root {
+  --main-color: #39ff14;
+  --bg: #232d25;
+}
+body {
+  background: var(--bg);
+  color: var(--main-color);
+}
+</code></pre>
+          </div>
+          <div class="live-demo">
+            <div style="background:#232d25;color:#39ff14;padding:10px;">
+              <span>Этот текст и фон используют CSS-переменные!</span>
+            </div>
+          </div>
+          <div class="quiz">
+            <h3>Вопрос:</h3>
+            <div class="quiz-question">Что такое CSS-переменная?</div>
+            <div class="quiz-options">
+              <label><input type="radio" name="css6q1" value="a"> Специальный селектор</label>
+              <label><input type="radio" name="css6q1" value="b"> Переменная для хранения значения</label>
+              <label><input type="radio" name="css6q1" value="c"> Свойство для анимации</label>
+              <label><input type="radio" name="css6q1" value="d"> Тип шрифта</label>
+            </div>
+            <button class="quiz-submit main-btn">Проверить ответ</button>
+            <div class="quiz-result"></div>
+          </div>
+          <div class="practice">
+            <h3>Задание:</h3>
+            <p>Вынеси основные цвета и размеры сайта в переменные <code>:root</code> и используй их в стилях.</p>
+          </div>
+          <div class="complete-section">
+            <button class="complete-btn main-btn">Отметить неделю как пройденную</button>
+            <button class="undo-btn main-btn" style="background:#263c2a;color:#39ff14;">Отменить</button>
+          </div>
+        </div>
+      </div>
+      <!-- Междуметие 6 -->
+      <div class="accordion-item midweek" id="cssmid6">
+        <button class="accordion-btn">Междуметие 6: Итоги и вдохновение</button>
+        <div class="accordion-content">
+          <div class="theory">
+            <h3>Что ты уже знаешь?</h3>
+            <ul>
+              <li>Как использовать переменные</li>
+              <li>Как применять лучшие практики</li>
+            </ul>
+            <h3>Факт</h3>
+            <p>CSS продолжает развиваться: появляются новые свойства, такие как container queries, subgrid, новые функции для цветов.</p>
+            <h3>Вдохновение</h3>
+            <p>Посмотри на сайты <a href="https://awwwards.com/" target="_blank">Awwwards</a> — там лучшие примеры современного CSS-дизайна!</p>
+          </div>
+        </div>
+      </div>
+      <!-- Экзамен и финальный проект -->
+      <div class="accordion-item" id="cssexam">
+        <button class="accordion-btn">Экзамен и финальный проект</button>
+        <div class="accordion-content">
+          <div class="quiz">
+            <h3>Экзамен: выбери правильные ответы</h3>
+            <div class="quiz-question">1. Какой селектор выберет все абзацы?</div>
+            <div class="quiz-options">
+              <label><input type="radio" name="examq1" value="a"> .p</label>
+              <label><input type="radio" name="examq1" value="b"> p</label>
+              <label><input type="radio" name="examq1" value="c"> #p</label>
+              <label><input type="radio" name="examq1" value="d"> *p</label>
+            </div>
+            <div class="quiz-question">2. Какой CSS-свойство задаёт внутренний отступ?</div>
+            <div class="quiz-options">
+              <label><input type="radio" name="examq2" value="a"> margin</label>
+              <label><input type="radio" name="examq2" value="b"> padding</label>
+              <label><input type="radio" name="examq2" value="c"> border</label>
+              <label><input type="radio" name="examq2" value="d"> font-size</label>
+            </div>
+            <div class="quiz-question">3. Какой flex-свойство выравнивает элементы по вертикали?</div>
+            <div class="quiz-options">
+              <label><input type="radio" name="examq3" value="a"> justify-content</label>
+              <label><input type="radio" name="examq3" value="b"> align-items</label>
+              <label><input type="radio" name="examq3" value="c"> flex-direction</label>
+              <label><input type="radio" name="examq3" value="d"> gap</label>
+            </div>
+            <div class="quiz-question">4. Какой псевдокласс используется для наведения?</div>
+            <div class="quiz-options">
+              <label><input type="radio" name="examq4" value="a"> :active</label>
+              <label><input type="radio" name="examq4" value="b"> :hover</label>
+              <label><input type="radio" name="examq4" value="c"> :focus</label>
+              <label><input type="radio" name="examq4" value="d"> :visited</label>
+            </div>
+            <div class="quiz-question">5. Какой медиа-запрос для экранов меньше 600px?</div>
+            <div class="quiz-options">
+              <label><input type="radio" name="examq5" value="a"> @media (min-width: 600px)</label>
+              <label><input type="radio" name="examq5" value="b"> @media (max-width: 600px)</label>
+              <label><input type="radio" name="examq5" value="c"> @media (width: 600px)</label>
+              <label><input type="radio" name="examq5" value="d"> @media screen</label>
+            </div>
+            <div class="quiz-question">6. Как объявить CSS-переменную?</div>
+            <div class="quiz-options">
+              <label><input type="radio" name="examq6" value="a"> $main-color: #39ff14;</label>
+              <label><input type="radio" name="examq6" value="b"> --main-color: #39ff14;</label>
+              <label><input type="radio" name="examq6" value="c"> var(--main-color);</label>
+              <label><input type="radio" name="examq6" value="d"> color: #39ff14;</label>
+            </div>
+            <button class="quiz-submit main-btn">Проверить экзамен</button>
+            <div class="quiz-result"></div>
+          </div>
+          <div class="theory" style="margin-top:24px;">
+            <h3>Финальный проект</h3>
+            <p>
+              <b>Задача:</b> Оформи свой HTML-сайт из прошлого курса с помощью CSS.<br>
+              <b>Что нужно сделать:</b>
+              <ul>
+                <li>Используй переменные для цветов и размеров</li>
+                <li>Сделай сайт адаптивным с помощью медиа-запросов</li>
+                <li>Добавь плавные анимации и эффекты для кнопок и ссылок</li>
+                <li>Используй Flexbox для выравнивания блоков</li>
+                <li>Оформи заголовки, текст, меню и подвал</li>
+              </ul>
+              <b>Пример:</b>
+              <pre><code>:root {
+  --main-color: #39ff14;
+  --bg: #232d25;
+}
+body {
+  background: var(--bg);
+  color: var(--main-color);
+  font-family: 'Montserrat', Arial, sans-serif;
+}
+a {
+  color: #8ee4af;
+  transition: color 0.2s;
+}
+a:hover {
+  color: #21b573;
+}
+@media (max-width: 600px) {
+  body { font-size: 0.9rem; }
+}
+</code></pre>
+              <b>Результат:</b> Твой сайт выглядит современно, удобно и красиво!
+            </p>
+            <button id="goToJsBtn" class="main-btn js-btn">Перейти к JS</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="css-course.js"></script>
+</body>
+</html>
