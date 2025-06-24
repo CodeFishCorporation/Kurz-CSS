@@ -7,20 +7,32 @@ document.addEventListener('DOMContentLoaded', function() {
     'cssweek5': { css5q1: 'a' },
     'cssweek6': { css6q1: 'b' },
     'cssexam': {
-      examq1: 'b',
-      examq2: 'b',
-      examq3: 'b',
-      examq4: 'b',
-      examq5: 'b',
-      examq6: 'b'
+      examq1: 'b',  // .main
+      examq2: 'b',  // padding
+      examq3: 'b',  // align-items
+      examq4: 'b',  // :hover
+      examq5: 'b',  // @media (max-width: 600px)
+      examq6: 'b',  // --main-color: #39ff14;
+      examq7: 'a',  // transition и :hover
+      examq8: 'a',  // display: flex; flex-wrap: wrap;
+      examq9: 'a',  // CSS-переменные
+      examq10: 'a'  // DevTools
     }
   };
 
   document.querySelectorAll('.accordion-btn').forEach(btn => {
     btn.addEventListener('click', function() {
-      const content = this.nextElementSibling;
-      this.classList.toggle('active');
-      content.classList.toggle('active');
+      const item = btn.closest('.accordion-item');
+      // Закрыть все остальные
+      document.querySelectorAll('.accordion-item .accordion-content').forEach(content => {
+        if (content !== btn.nextElementSibling) {
+          content.classList.remove('active');
+          content.previousElementSibling.classList.remove('active');
+        }
+      });
+      // Открыть/закрыть текущий
+      btn.classList.toggle('active');
+      btn.nextElementSibling.classList.toggle('active');
     });
   });
 
@@ -85,6 +97,14 @@ document.addEventListener('DOMContentLoaded', function() {
     if (examItem) {
       examItem.style.display = (completedArr.length === totalWeeks) ? '' : 'none';
     }
+    completeBtns.forEach((btn, idx) => {
+      const item = btn.closest('.accordion-item');
+      const content = item.querySelector('.accordion-content');
+      if (btn.classList.contains('completed')) {
+        content.classList.remove('active');
+        item.querySelector('.accordion-btn').classList.remove('active');
+      }
+    });
   }
 
   completeBtns.forEach((btn, idx) => {
