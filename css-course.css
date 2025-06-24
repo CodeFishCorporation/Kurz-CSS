@@ -306,6 +306,11 @@ pre {
   background: #39ff14 !important;
   color: #232d25 !important;
 }
+.undo-btn.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+  filter: grayscale(0.7);
+}
 
 .main-btn {
   background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));

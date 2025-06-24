@@ -22,7 +22,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
   document.querySelectorAll('.accordion-btn').forEach(btn => {
     btn.addEventListener('click', function() {
-      const item = btn.closest('.accordion-item');
       // Закрыть все остальные
       document.querySelectorAll('.accordion-item .accordion-content').forEach(content => {
         if (content !== btn.nextElementSibling) {
@@ -30,25 +29,89 @@ document.addEventListener('DOMContentLoaded', function() {
           content.previousElementSibling.classList.remove('active');
         }
       });
+
       // Открыть/закрыть текущий
+      const isActive = btn.classList.contains('active');
       btn.classList.toggle('active');
       btn.nextElementSibling.classList.toggle('active');
+
+      // Центрировать только если открываем (а не закрываем)
+      if (!isActive) {
+        setTimeout(() => {
+          const btnRect = btn.getBoundingClientRect();
+          const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+          const btnCenter = btnRect.top + scrollTop + btnRect.height / 2;
+          const windowCenter = window.innerHeight / 2;
+          let targetY = btnCenter - windowCenter;
+
+          // Не выходим за пределы документа
+          const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+          targetY = Math.max(0, Math.min(targetY, maxScroll));
+
+          window.scrollTo({ top: targetY, behavior: 'smooth' });
+        }, 600); // увеличенная задержка для корректного схлопывания
+      }
     });
   });
 
   document.querySelectorAll('.weeks-nav-floating button').forEach(btn => {
     btn.addEventListener('click', function() {
       const weekId = this.dataset.goto;
-      const target = document.getElementById(weekId);
-      if (target) {
-        const rect = target.getBoundingClientRect();
+      const item = document.getElementById(weekId);
+      if (!item) return;
+      const btnHeader = item.querySelector('.accordion-btn');
+      const content = item.querySelector('.accordion-content');
+      const isActive = btnHeader.classList.contains('active');
+
+      // Закрыть все остальные недели
+      document.querySelectorAll('.accordion-item .accordion-content').forEach(cont => {
+        if (cont !== content) {
+          cont.classList.remove('active');
+          cont.previousElementSibling.classList.remove('active');
+        }
+      });
+
+      // Открыть нужную неделю (если была закрыта)
+      btnHeader.classList.add('active');
+      content.classList.add('active');
+
+      // Центрировать: верх блока по центру экрана
+      function centerAccordionItemTop() {
+        const itemRect = item.getBoundingClientRect();
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        const targetY = rect.top + scrollTop - (window.innerHeight / 2) + (rect.height / 2);
+        let targetY = itemRect.top + scrollTop - (window.innerHeight / 2);
+        const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+        targetY = Math.max(0, Math.min(targetY, maxScroll));
         window.scrollTo({ top: targetY, behavior: 'smooth' });
-        target.classList.remove('flash-highlight');
-        void target.offsetWidth;
-        target.classList.add('flash-highlight');
-        setTimeout(() => target.classList.remove('flash-highlight'), 700);
+
+        // Вспышка для визуального выделения
+        item.classList.remove('flash-highlight');
+        void item.offsetWidth;
+        item.classList.add('flash-highlight');
+        setTimeout(() => item.classList.remove('flash-highlight'), 700);
+      }
+
+      // Если неделя уже открыта — центрируем сразу
+      if (isActive) {
+        setTimeout(centerAccordionItemTop, 50);
+      } else {
+        // Центрируем после завершения transition (только для открытия)
+        let done = false;
+        function onTransitionEnd(e) {
+          if (e.target === content && !done) {
+            done = true;
+            centerAccordionItemTop();
+            content.removeEventListener('transitionend', onTransitionEnd);
+          }
+        }
+        content.addEventListener('transitionend', onTransitionEnd);
+        setTimeout(() => {
+          if (!done) {
+            done = true;
+            centerAccordionItemTop();
+            content.removeEventListener('transitionend', onTransitionEnd);
+          }
+        }, 800); // увеличь если transition дольше
       }
     });
   });
@@ -108,16 +171,23 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   completeBtns.forEach((btn, idx) => {
-    if (completedArr.includes(idx)) {
-      btn.classList.add('completed');
-      btn.textContent = 'Неделя завершена!';
-      btn.disabled = true;
+    const undoBtn = undoBtns[idx];
+    // По умолчанию "Отменить" неактивна
+    if (!btn.classList.contains('completed')) {
+      undoBtn.disabled = true;
+      undoBtn.classList.add('disabled');
+    } else {
+      undoBtn.disabled = false;
+      undoBtn.classList.remove('disabled');
     }
+
     btn.addEventListener('click', function() {
       if (!btn.classList.contains('completed')) {
         btn.classList.add('completed');
         btn.textContent = 'Неделя завершена!';
         btn.disabled = true;
+        undoBtn.disabled = false;
+        undoBtn.classList.remove('disabled');
         completedArr.push(idx);
         localStorage.setItem('cssCourseCompletedWeeks', JSON.stringify(completedArr));
         updateProgress();
@@ -132,6 +202,8 @@ document.addEventListener('DOMContentLoaded', function() {
         completeBtn.classList.remove('completed');
         completeBtn.textContent = 'Отметить неделю как пройденную';
         completeBtn.disabled = false;
+        btn.disabled = true;
+        btn.classList.add('disabled');
         completedArr = completedArr.filter(i => i !== idx);
         localStorage.setItem('cssCourseCompletedWeeks', JSON.stringify(completedArr));
         updateProgress();
